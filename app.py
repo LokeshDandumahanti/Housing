@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
+import sklearn
 
 # Load the model and columns
 X_columns = pd.read_csv("dora.csv")
