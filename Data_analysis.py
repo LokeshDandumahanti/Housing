@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
 import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
+import pickle
 
-# Load the model and columns
 with open("banglore_home_prices_model.pkl", 'rb') as file:
     lr_clf = pickle.load(file)
 
