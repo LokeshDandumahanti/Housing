@@ -1,13 +1,12 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import joblib
 import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
-import pickle
 
-with open("banglore_home_prices_model.pkl", 'rb') as file:
-    lr_clf = pickle.load(file)
-
+# Load the model and columns
+lr_clf = joblib.load("banglore_home_prices_model.joblib")
 X_columns = pd.read_csv("dora.csv")
 OHE = pd.read_csv("B5.csv")
 locations = OHE['location'].tolist()
@@ -56,6 +55,12 @@ predictions = get_price_predictions(location, sqft, bhk1)
 prices_table = pd.DataFrame(predictions, columns=[f"{i+1} BHK" for i in range(bhk1)], index=[f"{i} Bathrooms" for i in range(1, bath1+1)])
 st.table(prices_table)
 
+# Embed Google Maps
+map_html = """
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.56659330425!2d77.46612584428054!3d12.954280236534027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1716172406242!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+"""
+components.html(map_html, height=450)
+
 # Plot graphs for each number of BHKs
 fig, axs = plt.subplots(bhk1, 1, figsize=(10, bhk1*5), sharex=True)
 bath_values = range(1, 6)
@@ -73,8 +78,4 @@ fig.text(0.5, 0.04, 'Number of Bathrooms', ha='center', va='center')
 plt.tight_layout(pad=3.0)
 st.pyplot(fig)
 
-# Embed Google Maps
-map_html = """
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.56659330425!2d77.46612584428054!3d12.954280236534027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1716172406242!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-"""
-components.html(map_html, height=450)
+
