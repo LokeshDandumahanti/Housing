@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
 
 # Load the model and columns
-X_columns = pd.read_csv("C:/Users/vijay/OneDrive/Desktop/Banglore Housing Project/dora.csv")
-df12 = pd.read_csv("C:/Users/vijay/OneDrive/Desktop/Banglore Housing Project/output.csv")
-OHE = pd.read_csv("C:/Users/vijay/OneDrive/Desktop/Banglore Housing Project/B5.csv")
+X_columns = pd.read_csv("dora.csv")
+df12 = pd.read_csv("output.csv")
+OHE = pd.read_csv("B5.csv")
 locations = OHE['location'].tolist()
 
 
