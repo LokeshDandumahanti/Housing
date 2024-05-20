@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import streamlit.components.v1 as components
 
 # Load the model and columns
-lr_clf = joblib.load("C:/Users/vijay/OneDrive/Desktop/Banglore Housing Project/banglore_home_prices_model.pkl")
-X_columns = pd.read_csv("C:/Users/vijay/OneDrive/Desktop/Banglore Housing Project/dora.csv")
-OHE = pd.read_csv("C:/Users/vijay/OneDrive/Desktop/Banglore Housing Project/B5.csv")
+lr_clf = joblib.load("banglore_home_prices_model.pkl")
+X_columns = pd.read_csv("dora.csv")
+OHE = pd.read_csv("B5.csv")
 locations = OHE['location'].tolist()
 
 # Non-changeable variables
